@@ -1,41 +1,32 @@
+// on key lift function
 function keyPush1(evt)
 {
-	//a
+	//a key, make sure player doesn't keep moving after lifting the key
 	if (evt.keyCode == 65)
 	{
 		player.xv=0;
 	}
-//d
+	//d key, make sure player doesn't keep moving after lifting the key
 	else if(evt.keyCode == 68)
 	{
 		player.xv=0;
 	}
 }
-
+// is key pushed down?
 function keyPush(evt) {
-//a
+	//a, move left
 	if (evt.keyCode == 65)
 	{
 		player.xv=-.06;
 	}
-//d
+	//d, move right
 	else if(evt.keyCode == 68)
 	{
 		player.xv=.06;
 	}
-//w
+	//w, shoot bullet
 	else if (evt.keyCode == 87)
 	{
-		for (var i = 0; i < bulletList.length; i++)
-		{
-			if (bulletList[i].spawned == 0 && bulletCounter == 100)
-			{
-				bulletCounter = 0;
-				bulletList[i].px = player.px;
-				bulletList[i].py = player.py;
-				bulletList[i].spawned = 1;
-				break;
-			}
-		}
+		spawnBullet();
 	}
 }
