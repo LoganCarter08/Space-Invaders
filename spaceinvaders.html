@@ -1,0 +1,121 @@
+<link href="css/style.css" type="text/css" rel="stylesheet">
+<link href="css/stars.css" type="text/css" rel="stylesheet">
+<canvas id="gc" width="400" height="400"></canvas>
+<script src="js/weapons.js"></script>
+<script src="js/variables.js"></script>
+<script src="js/player.js"></script>
+<script src="js/enemy.js"></script>
+<script src="js/keyPresses.js"></script>
+
+<body align="center">
+<script>
+window.onload=function() {
+    canv=document.getElementById("gc");
+    ctx=canv.getContext("2d");
+    document.addEventListener("keydown",keyPush);
+	document.addEventListener("keyup",keyPush1);
+    setInterval(game, 1);
+	initialize();
+};
+
+function initialize()
+{
+	fillArmy();
+	fillBullets();
+	fillBombs();
+	deadCount = 0;
+	bombDelay = 0;
+	bombDelayConst = 500 - (level * 100);
+	if (bombDelayConst <= 0)
+	{
+		bombDelayConst = 20;
+	}
+}
+function game() {
+	if (over == 0)
+	{
+		playerBounds();
+		moveMotherX();
+		
+		if (bulletCounter < 100)
+		{
+			bulletCounter++;
+		}
+
+		player.px+=player.xv;
+		
+		moveMotherY();
+		
+		ctx.fillStyle="black";
+		ctx.fillRect(0,0,canv.width,canv.height);
+		
+		if (startDelay <= 0)
+		{
+			ctx.fillStyle="white";
+			showBullets();
+			
+			if (bombDelay != bombDelayConst)
+			{
+				bombDelay++;
+			}
+
+			bombCollision();
+
+			ctx.fillStyle="lime";
+			showArmy();
+			
+			showPlayer();
+			
+			bigCounter++;
+			if (levelUpDelay > 0)
+			{
+				ctx.font = "50px Orbitron";
+				ctx.fillStyle = "white";
+				ctx.fillText(out2, 100, 200);
+				levelUpDelay--;
+			}
+		}
+		else
+		{
+			ctx.font = "20px Orbitron";
+			ctx.fillStyle = "white";
+			ctx.fillText("Press 'a' and 'd' to move", 60, 200);
+			ctx.fillText("and 'w' to shoot!", 100, 220);
+			startDelay--;
+		}
+		
+		
+		
+		out = "Lives: " + lives;
+		out2 = "Level: " + level;
+		out3 = "Score: " + score;
+		ctx.font = "10px Orbitron";
+		ctx.fillStyle = "white";
+		ctx.fillText(out2, 10, 395);
+		ctx.fillText(out, 185, 395);
+		ctx.fillText(out3, 330, 395);
+	}
+	else
+	{
+		ctx.font = "20px Orbitron";
+		ctx.fillStyle = "white";
+		ctx.fillText("Game over!", 152, 200);
+		ctx.fillText(out3, 170, 220);
+		ctx.fillText("Refresh to restart!", 120, 240);
+		startDelay--;
+	}
+	
+	if (lives == 0)
+	{
+		over = 1;
+	}
+}
+
+
+
+</script>
+</body>
+
+<div id='stars'></div>
+<div id='stars2' ></div>
+<div id='stars3'></div>
