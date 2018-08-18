@@ -59,7 +59,7 @@ function showArmy()
 			{
 				if(bulletList[j].spawned == 1 && army[i].dead == 0)
 				{
-					if ((bulletList[j].px >= army[i].px && bulletList[j].px <= army[i].px + .75) && (bulletList[j].py >= army[i].py && bulletList[j].py <= army[i].py +.75))
+					if ((bulletList[j].px >= army[i].px && bulletList[j].px <= army[i].px + .9) && (bulletList[j].py >= army[i].py && bulletList[j].py <= army[i].py +.9))
 					{
 						army[i].dead = 1;
 						bulletList[j].spawned = 0;
@@ -71,7 +71,7 @@ function showArmy()
 			if (army[i].dead == 0)
 			{
 				ctx.fillRect(army[i].px*gs,army[i].py*gs,gs-2,gs-2);
-				if ((player.px >= army[i].px && player.px <= (army[i].px+.75)) && (player.py >= army[i].py && player.py <= (army[i].py+.75)))
+				if ((player.px >= army[i].px && player.px <= (army[i].px+.9)) && (player.py >= army[i].py && player.py <= (army[i].py+.9)))
 				{
 					lives--;
 				}
