@@ -43,7 +43,7 @@ function keyPush(evt) {
 				}
 			}
 		}
-		else
+		else if (over == 1 && restartDelay == 0)
 		{
 			reset();
 		}
