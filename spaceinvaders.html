@@ -92,9 +92,7 @@ function game() {
 			// did we recently level up? if so then delay the screen and show it
 			if (levelUpDelay > 0)
 			{
-				ctx.font = "50px Orbitron";
-				ctx.fillStyle = "white";
-				ctx.fillText(out2, 100, 200);
+				levelUp();
 				levelUpDelay--;
 			}
 		}
