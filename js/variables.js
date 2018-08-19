@@ -1,7 +1,7 @@
 // indicate what level we are on
 level = 1;
 // character multiplier for storing on canvas
-gs=tc=20;
+gs = 20;
 // is game over? Binary rep, 0 is false 1 is true
 over = 0;
 // should we move down? Binary rep, 0 is false 1 is true
