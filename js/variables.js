@@ -30,6 +30,8 @@ score = 0;
 levelUpDelay = 0;
 // delay the screen before game starts to show instructions
 startDelay = 750;
+// delay to make sure game over screen shows
+restartDelay = 400;
 // reset game after ending
 function reset()
 {
@@ -37,5 +39,6 @@ function reset()
 	level = 1;
 	score = 0;
 	lives = 3;
+	restartDelay = 400;
 	initialize();
 }
