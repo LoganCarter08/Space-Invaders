@@ -26,6 +26,13 @@ function showGameOver()
 	ctx.fillStyle = "white";
 	ctx.fillText("Game over!", 152, 200);
 	ctx.fillText(out3, 170, 220);
-	ctx.fillText("Refresh to restart!", 120, 240);
+	ctx.fillText("Press 'w' to restart!", 115, 240);
 	startDelay--;
+}
+// display level up screen
+function levelUp()
+{
+		ctx.font = "50px Orbitron";
+		ctx.fillStyle = "white";
+		ctx.fillText(out2, 100, 200);
 }
