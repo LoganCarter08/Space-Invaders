@@ -86,13 +86,20 @@ function game() {
 			// display our player
 			showPlayer();
 			
+			// are we still shooting?
+			if (shoot == 1)
+			{
+				spawnBullet();
+			}
 			// increment to show when we can move mothership next
 			bigCounter++;
 			
 			// did we recently level up? if so then delay the screen and show it
 			if (levelUpDelay > 0)
 			{
-				levelUp();
+				ctx.font = "50px Orbitron";
+				ctx.fillStyle = "white";
+				ctx.fillText(out2, 100, 200);
 				levelUpDelay--;
 			}
 		}
