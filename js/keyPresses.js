@@ -11,6 +11,11 @@ function keyPush1(evt)
 	{
 		player.xv=0;
 	}
+	// stop shooting
+	else if (evt.keyCode == 87)
+	{
+		shoot = 0;
+	}
 }
 // is key pushed down?
 function keyPush(evt) {
@@ -27,25 +32,6 @@ function keyPush(evt) {
 	//w, shoot bullet
 	else if (evt.keyCode == 87)
 	{
-		if (over == 0)
-		{
-			for (var i = 0; i < bulletList.length; i++)
-			{
-				// make sure we get a none spawned bullet and the delay is over
-				if (bulletList[i].spawned == 0 && bulletCounter == 100)
-				{
-					// reset delay and spawn bullet at player location
-					bulletCounter = 0;
-					bulletList[i].px = player.px;
-					bulletList[i].py = player.py;
-					bulletList[i].spawned = 1;
-					break;
-				}
-			}
-		}
-		else if (over == 1 && restartDelay == 0)
-		{
-			reset();
-		}
+		shoot = 1;
 	}
 }
