@@ -11,7 +11,6 @@ function keyPush1(evt)
 	{
 		player.xv=0;
 	}
-	// stop shooting
 	else if (evt.keyCode == 87)
 	{
 		shoot = 0;
@@ -33,5 +32,25 @@ function keyPush(evt) {
 	else if (evt.keyCode == 87)
 	{
 		shoot = 1;
+	}
+}
+
+// allow buttons if the user is mobile and desires buttons
+function buttonPush(code)
+{
+	// move left
+	if (code == -1)
+	{
+		player.xv = -.06;
+	}
+	// move right
+	else if(code == 1)
+	{
+		player.xv = .06;
+	}
+	// shoot bullet
+	else if (code == 0)
+	{
+		spawnBullet();
 	}
 }
