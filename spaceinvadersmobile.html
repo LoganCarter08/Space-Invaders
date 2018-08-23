@@ -1,0 +1,137 @@
+<link href="css/style.css" type="text/css" rel="stylesheet">
+<link href="css/stars.css" type="text/css" rel="stylesheet">
+<canvas id="gc" width="400" height="400"></canvas>
+<script src="js/weapons.js"></script>
+<script src="js/variables.js"></script>
+<script src="js/player.js"></script>
+<script src="js/enemy.js"></script>
+<script src="js/keyPresses.js"></script>
+<script src="js/screens.js"></script>
+
+<body align="center">
+<script>
+window.onload=function() {
+    canv=document.getElementById("gc");
+    ctx=canv.getContext("2d");
+    document.addEventListener("keydown",keyPush);
+	document.addEventListener("keyup",keyPush1);
+    setInterval(game, 1);
+	initialize();
+};
+// set and reset our game 
+function initialize()
+{
+	// create our army, bombs, and bullets
+	fillArmy();
+	fillBullets();
+	fillBombs();
+	// none are dead
+	deadCount = 0;
+	bombDelay = 0;
+	// update delay to matcht the level
+	bombDelayConst = 500 - (level * 100);
+	if (bombDelayConst <= 0)
+	{
+		bombDelayConst = 20;
+	}
+}
+// run our game!
+function game() {
+	// is our game over?
+	if (over == 0)
+	{
+		// make sure the player is in the world
+		playerBounds();
+		
+		// move the mothership/army
+		moveMotherX();
+		
+		// see if we can shoot
+		if (bulletCounter < 100)
+		{
+			bulletCounter++;
+		}
+		
+		// update the player's position
+		player.px+=player.xv;
+		//player.xv = 0;
+		
+		// move the mother ship down if we can
+		moveMotherY();
+		
+		// display the background as black, hides old pictures that should be moved instead of overlaid, future update
+		ctx.fillStyle="black";
+		ctx.fillRect(0,0,canv.width,canv.height);
+		
+		// should we show the start screen, if not then do this
+		if (startDelay <= 0)
+		{
+			// make the bullets and bombs orange
+			ctx.fillStyle="orange";
+			showBullets();
+			
+			// bomb delay is not over, increase
+			if (bombDelay != bombDelayConst)
+			{
+				bombDelay++;
+			}
+			
+			// check if bomb is touching player
+			bombCollision();
+			
+			// print our army and see if we are touching the player
+			ctx.fillStyle="lime";
+			showArmy();
+			checkIfDead();
+			
+			// display our player
+			showPlayer();
+			
+			// are we still shooting?
+			if (shoot == 1)
+			{
+				spawnBullet();
+			}
+			// increment to show when we can move mothership next
+			bigCounter++;
+			
+			// did we recently level up? if so then delay the screen and show it
+			if (levelUpDelay > 0)
+			{
+				ctx.font = "50px Orbitron";
+				ctx.fillStyle = "white";
+				ctx.fillText(out2, 100, 200);
+				levelUpDelay--;
+			}
+		}
+		// intro screen
+		else
+		{
+			showIntro();
+		}
+		
+		// print out level, score, and lives. In screen.js for lack of a better location
+		showStats();
+	}
+	else
+	{
+		// show game over screen
+		showGameOver();
+	}
+	
+	// if we are out of lives then show that the game is now over 
+	if (lives == 0)
+	{
+		over = 1;
+	}
+}
+</script>
+
+<input class = "low1" type="button" onclick="buttonPush(-1)" value="Left">
+<input class = "low2" type="button" onclick="buttonPush(0)" value="Fire">
+<input class = "low3" type="button" onclick="buttonPush(1)" value="Right">
+</body>
+
+<div id='stars'></div>
+<div id='stars2' ></div>
+<div id='stars3'></div>
